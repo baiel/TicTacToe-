@@ -1,0 +1,71 @@
+//--including-library--
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Menu extends Board{
+public void Newgame(){
+for (int d = 0; d < 9; d++)//using for loop to return all variables from board class
+{
+super.b[d].setIcon(null);//earase all images from some buttons
+super.arr[d]=0;//equal to zero array that uses in click button algorithm
+super.t[d]=null;//erase data from string array that uses in method to check winner
+}
+super.img = new ImageIcon(getClass().getResource("x.png"));//assign to initial image "X"
+super.count=0;//equal variable that uses in draw method
+super.log=true;//boolean uses to algorithm of switching X or O
+super.draw=false;//return draw logic to initial
+super.win=false;//return win logic to initial
+super.xwin=false;//return X winner logic to initial
+super.owin=false;//return O winner logic to initial
+}
+public void Setl2(){//create a method to use for second label
+	if(super.draw==true){//check if draw true
+		l2.setVisible(true);
+		l2.setText("It was draw");}//set appropirate text to JLabel
+	else if(super.xwin==true){//check if X won true
+		l2.setVisible(true);
+		l2.setText("Winner was : X");}//set appropirate text to JLabel
+	else if(super.owin==true){//check if O won true
+		l2.setVisible(true);
+		l2.setText("Winner was : O");}//set appropirate text to JLabel
+}
+//--initialize-variables--
+public JPanel menu;//create method to menu panel
+JButton exit,newgame;//create JButtons
+JLabel l1,l2;//create JLabels
+//--set-panel--
+public Menu(){
+ButtonListener action = new ButtonListener();//create button listener object
+menu = new JPanel();//create a panel object
+menu.setLayout(new GridLayout(4,1));//set layout of components inside panel
+exit = new JButton("EXIT");//create JButton's object
+newgame = new JButton("NEW GAME");//create JButton's object
+exit.addActionListener (action);//iclude button listener
+newgame.addActionListener (action);//iclude button listener
+l1=new JLabel("Welcome to Tic Tac Toe Game");//object of label 1 and set text of it
+l1.setFont(new Font("", Font.BOLD, 20));//set font of label 1
+l1.setForeground(Color.MAGENTA);//add color to font
+l2=new JLabel("");//create object of second label
+l2.setFont(new Font("", Font.BOLD, 22));//set font of label 2
+l2.setForeground(Color.BLUE);//add color to font
+l2.setVisible(false);//set invisible in the begining of game
+menu.add(l1);//add label into panel
+menu.add(newgame);//add button into panel
+menu.add(l2);//add label into panel
+menu.add(exit);//add button into panel
+menu.setPreferredSize (new Dimension(300, 400));//set size of panel
+add (menu);//add itself to JFrame
+}
+//--set-actionlistener-of-button--
+public class ButtonListener implements ActionListener
+{
+public void actionPerformed (ActionEvent e)
+{
+Setl2();//call method
+if (e.getSource() == exit){//if exit button is clicked
+System.exit(0);}//stop and close program
+else if (e.getSource() == newgame){//if exit button is clicked
+Newgame();}//call Newgame method
+}
+}
+}
