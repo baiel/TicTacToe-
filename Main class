@@ -1,0 +1,14 @@
+import javax.swing.JFrame;//import JFrame library
+class Main{
+public static void main (String[] args)
+ {
+ JFrame f = new JFrame ("Tic Tac Toe");//create an object of JFrame
+ f.setSize(700,450);//set size of frame
+ f.setResizable(false);//make frame resizable
+ f.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);//frame exits on close
+ f.setLocationRelativeTo(null);//set frame on the midle of screen
+ f.getContentPane().add(new Menu());//add Menu class
+ f.pack();
+ f.setVisible(true);//set visible
+ }
+}
