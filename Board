@@ -1,0 +1,194 @@
+//--including-library--
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+public class Board extends JPanel{
+//--initialize-variables--
+     String XY="X";
+ 	 public JPanel p;
+	 Boolean log=true;
+	 public JButton b[] = new JButton[9];
+	 int[] arr = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	 String t[]=new String[9];
+	 ImageIcon img,x,o;
+	 public int count=0;
+	 public boolean draw=false;
+	 public boolean win=false;
+	 public boolean xwin=false;
+	 public boolean owin=false;
+//--set-panel--
+ 	 public Board(){
+	 	ButtonListener listener = new ButtonListener();
+	 	p = new JPanel();
+	 	img = new ImageIcon(getClass().getResource("x.png"));
+	 	x = new ImageIcon(getClass().getResource("xn.png"));
+	 	o = new ImageIcon(getClass().getResource("on.png"));
+	 	for (int i = 0; i < 9; i++) {
+	 	b[i] = new JButton ("");
+ 	 	b[i].addActionListener (listener);
+ 	 	p.add (b[i]);}
+ 	 	p.setLayout(new GridLayout(3,3));
+ 	 	p.setPreferredSize (new Dimension(400, 400));
+ 	 	setBackground (Color.gray);
+ 	 	add (p);
+		}
+	//--set-actionlistener--
+ 	public class ButtonListener implements ActionListener
+    {
+ 	public void actionPerformed (ActionEvent event)
+  	{
+  	for (int c = 0; c < 9; c++)
+  	{
+  		if (event.getSource() == b[c]&&arr[c]<1){
+  		if(log==true&&win!=true)
+  		{
+  			b[c].setIcon(img);
+  			log=false;
+  			img = new ImageIcon(getClass().getResource("o.png"));
+  			arr[c]++;
+  			t[c]="X";
+  			count++;}
+  		else if(log==false&&win!=true){
+  			b[c].setIcon(img);
+  			log=true;
+  			img = new ImageIcon(getClass().getResource("x.png"));
+  			arr[c]++;
+  			t[c]="O";
+  			count++;}
+}}
+	 	   	Xwinner();
+	  		Owinner();
+  			Tie();
+}
+}
+//--Xwinner-method--
+public void Xwinner(){
+  	if(t[0]=="X"&&t[1]==t[0]&&t[2]==t[0]){
+		System.out.println("First horizontal X");
+		b[0].setIcon(x);
+		b[1].setIcon(x);
+		b[2].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[3]=="X"&&t[4]==t[3]&&t[5]==t[3]){
+		System.out.println("Second horizontal X");
+		b[3].setIcon(x);
+		b[4].setIcon(x);
+		b[5].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[6]=="X"&&t[7]==t[6]&&t[8]==t[6]){
+		System.out.println("Third horizontal X");
+		b[6].setIcon(x);
+		b[7].setIcon(x);
+		b[8].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[0]=="X"&&t[3]==t[0]&&t[6]==t[0]){
+		System.out.println("First vertical X");
+		b[0].setIcon(x);
+		b[3].setIcon(x);
+		b[6].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[1]=="X"&&t[4]==t[1]&&t[7]==t[1]){
+		System.out.println("Second vertical X");
+		b[1].setIcon(x);
+		b[4].setIcon(x);
+		b[7].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[2]=="X"&&t[5]==t[2]&&t[8]==t[2]){
+		System.out.println("Third vertical X");
+		b[2].setIcon(x);
+		b[5].setIcon(x);
+		b[8].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[0]=="X"&&t[4]==t[0]&&t[8]==t[0]){
+		System.out.println("First digonal X");
+		b[0].setIcon(x);
+		b[4].setIcon(x);
+		b[8].setIcon(x);
+		win=true;
+		xwin=true;}
+  	else if(t[2]=="X"&&t[4]==t[2]&&t[6]==t[2]){
+		System.out.println("Second diogonal X");
+		b[2].setIcon(x);
+		b[4].setIcon(x);
+		b[6].setIcon(x);
+		win=true;
+		xwin=true;}
+	}
+//--end-of-Xwinner-method--
+//------------------------
+//--Owinner-method--
+public void Owinner(){
+  	if(t[0]=="O"&&t[1]==t[0]&&t[2]==t[0]){
+		System.out.println("First horizontal O");
+		b[0].setIcon(o);
+		b[1].setIcon(o);
+		b[2].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[3]=="O"&&t[4]==t[3]&&t[5]==t[3]){
+		System.out.println("Second horizontal O");
+		b[3].setIcon(o);
+		b[4].setIcon(o);
+		b[5].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[6]=="O"&&t[7]==t[6]&&t[8]==t[6]){
+		System.out.println("Third horizontal O");
+		b[6].setIcon(o);
+		b[7].setIcon(o);
+		b[8].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[0]=="O"&&t[3]==t[0]&&t[6]==t[0]){
+		System.out.println("First vertical O");
+		b[0].setIcon(o);
+		b[3].setIcon(o);
+		b[6].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[1]=="O"&&t[4]==t[1]&&t[7]==t[1]){
+		System.out.println("Second vertical O");
+		b[1].setIcon(o);
+		b[4].setIcon(o);
+		b[7].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[2]=="O"&&t[5]==t[2]&&t[8]==t[2]){
+		System.out.println("Third vertical O");
+		b[2].setIcon(o);
+		b[5].setIcon(o);
+		b[8].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[0]=="O"&&t[4]==t[0]&&t[8]==t[0]){
+		System.out.println("First digonal O");
+		b[0].setIcon(o);
+		b[4].setIcon(o);
+		b[8].setIcon(o);
+		win=true;
+		owin=true;}
+  	else if(t[2]=="O"&&t[4]==t[2]&&t[6]==t[2]){
+		System.out.println("Second diogonal O");
+		b[2].setIcon(o);
+		b[4].setIcon(o);
+		b[6].setIcon(o);
+		win=true;
+		owin=true;}
+}
+//--end-of-Owinner-method--
+//-------------------
+//--Tie-method--
+public void Tie(){
+  		if(count==9&&win!=true){
+		System.out.println("Tie");
+		draw=true;
+	}
+}
+//--end-of-Tie-method--
+}
